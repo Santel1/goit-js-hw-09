@@ -3,6 +3,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { Report } from 'notiflix/build/notiflix-report-aio';
 
 const startBtn = document.querySelector('button[data-start]');
+const input = document.querySelector("input[type='text']");
 const daysValue = document.querySelector('[data-days]');
 const hoursValue = document.querySelector('[data-hours]');
 const minutesValue = document.querySelector('[data-minutes]');
@@ -38,6 +39,8 @@ flatpickr("input[type='text']", {
         hoursValue.textContent = addLeadingZero(timeLeft.hours);
         minutesValue.textContent = addLeadingZero(timeLeft.minutes);
         secondsValue.textContent = addLeadingZero(timeLeft.seconds);
+        startBtn.setAttribute('disabled', 'disabled');
+        input.setAttribute('disabled', 'disabled');
 
         if (ms <= 0) {
           clearInterval(timerInterval);
@@ -45,6 +48,8 @@ flatpickr("input[type='text']", {
           hoursValue.textContent = '00';
           minutesValue.textContent = '00';
           secondsValue.textContent = '00';
+          input.removeAttribute('disabled');
+          startBtn.removeAttribute('disabled');
         }
       }, 1000);
     });
